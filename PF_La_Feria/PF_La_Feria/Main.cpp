@@ -6,3 +6,7 @@
 **Semestre:2019-2
 **Descripcion: Se realizara una feria tomando en cuanta anteriormente imagenes para su comparacion
 */
+//Incluimos las librerias
+//#include <GL/glut.h>
+//#include <stdlib.h>
+#include "Main.h"
