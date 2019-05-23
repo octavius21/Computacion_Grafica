@@ -46,15 +46,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="cmodel\CModel.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Modelos\taza1.fbx">
-      <Filter>Archivos de recursos</Filter>
-    </None>
-    <None Include="Modelos\kitt.3ds">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>
