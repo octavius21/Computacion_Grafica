@@ -76,6 +76,8 @@ CTexture text16;//arbusto
 //Modelos
 CModel model1;//arbol
 CModel model2;//asiento
+CModel model3;//aguila
+CModel model4;//trash
 
 //Metodos
 void InitGL(GLvoid)
@@ -152,6 +154,8 @@ void InitGL(GLvoid)
 
 	model1._3dsLoad("Modelos/firtree3.3ds");
 	model2._3dsLoad("Modelos/garden.3ds");
+	model3._3dsLoad("Modelos/eagle.3ds");
+	//model4._3dsLoad("Modelos/trash.3ds");
 
 	objCamera.Position_Camera(0, -2.0f, 5, 0, -2.0f, 0, 0, 1, 0);
 }
@@ -788,6 +792,12 @@ void arboles(void) {//tematicos
 		glScalef(5, 5, 5);
 		model1.GLrender(NULL, _SHADED, 1.0);
 		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-45, 40, 0);
+			glScalef(5, 5, 5);
+			model3.GLrender(NULL, _SHADED, 1.0);
+		glPopMatrix();
 	glColor3f(1, 1, 1);
 }
 void taza(void) {
@@ -1072,6 +1082,11 @@ void display(void) { //se crea la funcion donde se dibuja todo
 
 				//arbustos
 				glPushMatrix();
+					glPushMatrix();
+					glTranslatef(7,-10, 45);
+					glScalef(10, 10, 10);
+					model4.GLrender(NULL, _SHADED, 1.0);
+					glPopMatrix();
 					glTranslatef(7, -10, 35);
 					arbusto();
 					glTranslatef(0, 0, -4);
