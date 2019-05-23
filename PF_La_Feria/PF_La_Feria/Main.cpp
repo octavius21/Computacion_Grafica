@@ -1,7 +1,7 @@
-/**************************Clase principal***************************************
-**************************Facultad de Ingeneria*********************************
-*************************Autores: Sandoval Juarez Tania**************************
-*************************         Gomez de la Cruz Luis Octavio*****************
+/**************************Clase principal***************************************AGRADECIMIENTOS A:*******************************
+**************************Facultad de Ingeneria*********************************Ing. Luis Sergio Valencia Castro*****************
+*************************Autores: Sandoval Juarez Tania**************************Héctor Alejandro Martínez Garduño***************
+*************************         Gomez de la Cruz Luis Octavio******************************************************************
 *************************Materia: Computacion Grafica****************************
 *************************Semestre:2019-2****************************************
 **Descripcion:******************************************************************
@@ -51,6 +51,8 @@ CFiguras fig5;//camino
 CFiguras fig6;//techo cielo dia
 CFiguras fig7;//nubes noche
 CFiguras fig8;//tienda
+CFiguras fig9;//medusa
+CFiguras fig10;//arbolreal
 
 //Texturas
 CTexture text0;//DIA
@@ -65,6 +67,11 @@ CTexture text8;//tienda
 CTexture text9;//tienda
 CTexture text10;//pared
 CTexture text11;//baño
+CTexture text12;//medusa madera
+CTexture text13;//carrito
+CTexture text14;//carrito2
+CTexture text15;//arbol real
+CTexture text16;//arbusto
 
 //Modelos
 CModel model1;//arbol
@@ -127,14 +134,559 @@ void InitGL(GLvoid)
 	text11.LoadTGA("Texturas/baño.tga");
 	text11.BuildGLTexture();
 	text11.ReleaseImage();
+	text12.LoadTGA("Texturas/madera.tga");
+	text12.BuildGLTexture();
+	text12.ReleaseImage();
+	text13.LoadTGA("Texturas/carro.tga");
+	text13.BuildGLTexture();
+	text13.ReleaseImage();
+	text14.LoadTGA("Texturas/metal.tga");
+	text14.BuildGLTexture();
+	text14.ReleaseImage();
+	text15.LoadTGA("Texturas/tree01.tga");
+	text15.BuildGLTexture();
+	text15.ReleaseImage();
+	text16.LoadTGA("Texturas/shrub.tga");
+	text16.BuildGLTexture();
+	text16.ReleaseImage();
 
 	model1._3dsLoad("Modelos/firtree3.3ds");
 	model2._3dsLoad("Modelos/garden.3ds");
-	
-
-
 
 	objCamera.Position_Camera(0, -2.0f, 5, 0, -2.0f, 0, 0, 1, 0);
+}
+void soporteMedusa(void) {
+	glPushMatrix();
+
+	//----------------1
+
+	glPushMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glTranslatef(0, 3.5, 0);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//----------------2
+
+	glPushMatrix();
+	glTranslatef(0, 0, -3.5);
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glTranslatef(0, 3.5, 0);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//-----------------3
+
+
+	glPushMatrix();
+	glTranslatef(-1.75, 0, -1.75);
+	glRotatef(90, 0, 1, 0);
+
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glTranslatef(0, 3.5, 0);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//-------------4
+
+	glPushMatrix();
+
+	glTranslatef(1.75, 0, -1.75);
+	glRotatef(90, 0, 1, 0);
+
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4.5, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glTranslatef(0, 3.5, 0);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	fig9.prisma(4, 0.5, 0.5, text12.GLindex);
+	glPopMatrix();
+
+	glPopMatrix();
+
+
+
+	glPopMatrix();
+}
+
+void translateMedusa(float x, float y, float z) {
+	glTranslatef(x * 4, y * 4, z * 4);
+}
+
+void columnasMedusa(int length) {
+
+	glPushMatrix();
+	soporteMedusa();
+	for (size_t i = 0; i < length; i++)
+	{
+		glPushMatrix();
+		glTranslated(0, i * 4, 0);
+		soporteMedusa();
+		glPopMatrix();
+
+	}
+
+	glPopMatrix();
+}
+
+void estructuraMedusaTotal(void) {
+
+	//Push General de la función
+	glPushMatrix();
+
+	columnasMedusa(5);
+	translateMedusa(1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(6);
+
+	//Primera curva
+
+	translateMedusa(1, 0, -1);
+	columnasMedusa(7);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(8);
+
+	translateMedusa(0, 0, -2);
+	columnasMedusa(9);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(10);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(11);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(12);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(13);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(14);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(15);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(16);
+
+	//Segunda Curva
+
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(17);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(17);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(17);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(17);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(17);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(16);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(14);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(13);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(12);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(10);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(9);
+
+	//Tercera Curva
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(7);//
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(7);
+
+	translateMedusa(0, 0, -2);
+	columnasMedusa(6);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(4);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(3);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(3);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(3);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(3);
+
+	//Cuarta Curva
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(4);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(9);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(11);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(13);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(15);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(17);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(19);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(19);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(17);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(15);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(13);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(11);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(9);
+
+	//Quinta curva
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(7);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(6);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(4);
+
+	translateMedusa(0, 0, -2);
+	columnasMedusa(4);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(6);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(7);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(8);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(9);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(10);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(11);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(12);
+
+	//SextaCurva
+	translateMedusa(-1, 0, -2);
+	columnasMedusa(13);
+	translateMedusa(-2, 0, -2);
+	columnasMedusa(13);
+	translateMedusa(-2, 0, 0);
+	columnasMedusa(13);
+	translateMedusa(-2, 0, 0);
+	columnasMedusa(13);
+	translateMedusa(-2, 0, 2);
+	columnasMedusa(13);
+	translateMedusa(-1, 0, 2);
+	columnasMedusa(13);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(12);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(10);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(9);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(8);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(7);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(6);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+
+	//Septima Curva
+	translateMedusa(1, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+
+	//Fin del circuito Medusa
+
+	//Pop General de la función
+	glPopMatrix();
+}
+
+
+void carroMedusa(void) {
+	glPushMatrix();
+	//Carro Medusa
+	glColor3f(1, 1, 1);
+	fig9.prisma(4, 0.5, 3, text14.GLindex);
+	glTranslatef(1.25, 1.25, 0);
+	fig9.prisma(1.5, 2, 3, text14.GLindex);
+	glTranslatef(-1, -0.25, 0);
+	glColor3f(1, 0, 0);
+	fig9.prisma(0.5, 1.5, 2, NULL);
+	glTranslatef(-0.625, -0.5, 0);
+	fig9.prisma(0.75, 0.5, 2, NULL);
+	glColor3f(1, 1, 1);
+	glTranslatef(-1.375, 0, 0);
+	fig9.prisma(0.5, 1.5, 3, text13.GLindex);
+
+	glPopMatrix();
+
+}
+
+void arregloCarrosMedusa(void) {
+	for (size_t i = 0; i < 8; i++)
+	{
+		carroMedusa();
+		glPushMatrix();
+		glTranslatef(i * 4, 0, 0);
+		carroMedusa();
+		glPopMatrix();
+
+	}
+}
+void arbol()
+{
+	glPushMatrix();
+	glDisable(GL_LIGHTING);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.1);
+	glBindTexture(GL_TEXTURE_2D, text15.GLindex);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.5, 10.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.5, 10.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(45, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.5, 10.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.5, 10.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-45, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.5, 10.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.5, 10.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.5, 10.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.5, 10.0, 0.0);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	//glDisable(GL_BLEND);        // Turn Blending Off
+	//glEnable(GL_DEPTH_TEST);    // Turn Depth Testing On
+	glEnable(GL_LIGHTING);
+
+	glPopMatrix();
+}
+void arbusto()
+{
+	glPushMatrix();
+	glDisable(GL_LIGHTING);
+	glEnable(GL_ALPHA_TEST);
+	//glDisable(GL_DEPTH_TEST);   // Turn Depth Testing Off
+	glAlphaFunc(GL_GREATER, 0.1);
+	//glEnable(GL_BLEND);     // Turn Blending On
+	//glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glBindTexture(GL_TEXTURE_2D, text16.GLindex);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.5, 3.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.5, 3.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(45, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.5, 3.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.5, 3.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-45, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.5, 3.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.5, 3.0, 0.0);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glBegin(GL_QUADS); //plano
+	glColor3f(1.0, 1.0, 1.0);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.5, 0.0, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.5, 3.0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.5, 3.0, 0.0);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	//glDisable(GL_BLEND);        // Turn Blending Off
+	//glEnable(GL_DEPTH_TEST);    // Turn Depth Testing On
+	glEnable(GL_LIGHTING);
+
+	glPopMatrix();
 }
 void camino(void) {
 	glPushMatrix();
@@ -156,7 +708,7 @@ void iniciocamino(void) {
 void tienda(void) {
 	//seven
 	glPushMatrix();
-		glTranslatef(35, 0, 30);
+		glTranslatef(35, 2, 30);
 		glRotatef(90,1,0,0);
 		glScalef(20, 10, 25);
 		glDisable(GL_LIGHTING);
@@ -165,7 +717,7 @@ void tienda(void) {
 	glPopMatrix();
 	//oxxo
 	glPushMatrix();
-		glTranslatef(-15, 0, 50);
+		glTranslatef(-15, 2, 50);
 		glRotatef(90, 1, 0, 0);
 		glRotatef(180,0,0,1);
 		glScalef(20, 10, 25);
@@ -175,7 +727,7 @@ void tienda(void) {
 	glPopMatrix();
 	//BAÑO
 	glPushMatrix();
-		glTranslatef(10, -5, 10);
+		glTranslatef(10, -3, 10);
 		glRotatef(90, 1, 0, 0);
 		glRotatef(90, 0, 0, 1);
 		glScalef(15, 10, 15);
@@ -216,7 +768,7 @@ void asiento(void) {
 
 	glEnable(GL_COLOR_MATERIAL);
 }
-void arboles(void) {
+void arboles(void) {//tematicos
 	glColor3f(0, 1, 1);
 	glPushMatrix();
 		glDisable(GL_COLOR_MATERIAL);
@@ -403,17 +955,21 @@ void display(void) { //se crea la funcion donde se dibuja todo
 							camino();//1.1.4
 							glTranslatef(-10, 0, 0);
 							camino();//1.1.4
+								 //DESVIACION IZQ RECTA
+									glPushMatrix();
+										glTranslatef(0, 0, -10);
+										camino();//
+										glTranslatef(0, 0, 10);
+										camino();//
+										glTranslatef(0, 0, 3);
+										camino();//
+									glPopMatrix();
 							glTranslatef(-10, 0, 0);
 							camino();//1.1.1.4
 							glTranslatef(-10, 0, 0);
 							camino();//1.1.1.1.4
 							glTranslatef(-10, 0, 0);
 							camino();//1.1.1.1.1.4
-								//DESVIACION IZQ RECTA
-									glTranslatef(0, 0, -20);
-									camino();//
-									glTranslatef(0, 0, 10);
-									camino();//
 						glPopMatrix();
 						//DESVIACION DER
 						glPushMatrix();
@@ -430,7 +986,7 @@ void display(void) { //se crea la funcion donde se dibuja todo
 							glTranslatef(10, 0, 0);
 							camino();//4.1.1.1.1.1
 								//DESVIACION DERE RECTA
-									glTranslatef(0, 0, -30);
+									glTranslatef(0, 0, -20);
 									camino();//
 									glTranslatef(0, 0, 10);
 									camino();//
@@ -468,6 +1024,82 @@ void display(void) { //se crea la funcion donde se dibuja todo
 
 				glPushMatrix();
 				tienda();
+				glPopMatrix();
+
+				glEnable(GL_LIGHTING);
+				//medusa
+				glPushMatrix();
+					glTranslatef(-25, -10, 20);
+					//glRotatef(90, 0, 1, 0);
+					glScalef(.5, .5, .5);
+					glPushMatrix();
+						glTranslatef(4, 20, -1.75);
+						glRotatef(180, 0, 1, 0);
+						arregloCarrosMedusa();
+					glPopMatrix();
+					estructuraMedusaTotal();
+				glPopMatrix();
+
+				//arboles
+				glPushMatrix();
+					glTranslatef(-7, -10,15);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+					glTranslatef(0, 0, -4);
+					arbol();
+				glPopMatrix();
+
+				//arbustos
+				glPushMatrix();
+					glTranslatef(7, -10, 35);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -20);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
+					glTranslatef(0, 0, -4);
+					arbusto();
 				glPopMatrix();
 			
 		glPopMatrix();
@@ -561,7 +1193,7 @@ int main(int argc, char** argv) //Funcion principal
 	glutKeyboardFunc(keyboard);//Indicamos a Glut funcion de manejo de teclado
 	glutSpecialFunc(arrow_keys);//Indicamos a Glut funcion de manejo de flechas
 	glutIdleFunc(animacion);//Indicamos el amnejo de animacion
-	//PlaySound(TEXT("Crash Bandicoot 1 Theme.wav"), NULL, SND_LOOP || SND_SYNC);//configuracion de musica
+	PlaySound(TEXT("circo.wav"), NULL, SND_LOOP || SND_SYNC);//configuracion de musica
 	glutMainLoop();//Hace un ciclo del Main
 	return 0;
 }
