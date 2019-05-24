@@ -25,6 +25,34 @@ using namespace std;
 #   pragma comment( lib, "legacy_stdio_definitions.lib" )
 #endif
 
+//KEYFRAMES
+float posx = -50;
+float posy = 40;
+float posz = 0;
+float giroaguila = 0;
+bool inicioanimacion = true;
+#define MAX_FRAMES 9
+int i_max_steps = 90;
+int i_curr_steps = 0;
+typedef struct _frame
+{
+	//Variables para GUARDAR Key Frames
+	float posX;		//Variable para PosicionX
+	float posY;		//Variable para PosicionY
+	float posZ;		//Variable para PosicionZ
+	float incX;		//Variable para IncrementoX
+	float incY;		//Variable para IncrementoY
+	float incZ;		//Variable para IncrementoZ
+	float giroaguila;
+	float giroaguilainc;
+
+}FRAME;
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 9;//cuantos datos introduciremos
+bool play = false;
+int playIndex = 0;
+bool time = true;
+
 //Atributos
 GLfloat Ambient[] = { 1,1,1,1 };
 GLfloat Diffuse[] = { 1,1,1,1 };// Diffuse Light Values
@@ -41,6 +69,7 @@ int angulotazas6 = 25.0;
 int angulotazas7 = 25.0;
 int angulotazas8 = 25.0;
 int angulotetera = 25.0;
+
 //Figuras
 CFiguras fig0;//DIA
 CFiguras fig1;//NOCHE caja del mundo cielo
@@ -80,6 +109,39 @@ CModel model3;//aguila
 CModel model4;//trash
 
 //Metodos
+void saveFrame(void)
+{
+
+	printf("frameindex %d\n", FrameIndex);
+
+	KeyFrame[FrameIndex].posX = posx;
+	KeyFrame[FrameIndex].posY = posy;
+	KeyFrame[FrameIndex].posZ = posz;
+
+	KeyFrame[FrameIndex].giroaguila = giroaguila;
+
+	FrameIndex++;
+}
+
+void resetElements(void)
+{
+	posx = KeyFrame[0].posX;
+	posy = KeyFrame[0].posY;
+	posz = KeyFrame[0].posZ;
+
+	giroaguila = KeyFrame[0].giroaguila;
+
+
+}
+void interpolation(void)
+{
+	KeyFrame[playIndex].incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;
+	KeyFrame[playIndex].incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;
+	KeyFrame[playIndex].incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;
+	KeyFrame[playIndex].giroaguilainc = (KeyFrame[playIndex + 1].giroaguila - KeyFrame[playIndex].giroaguila) / i_max_steps;
+
+}
+
 void InitGL(GLvoid)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //Fondo negro
@@ -156,6 +218,44 @@ void InitGL(GLvoid)
 	model2._3dsLoad("Modelos/garden.3ds");
 	model3._3dsLoad("Modelos/eagle.3ds");
 	//model4._3dsLoad("Modelos/trash.3ds");
+
+	KeyFrame[0].posX = -50;
+	KeyFrame[0].posY = 40;
+	KeyFrame[0].posZ = 0;
+	KeyFrame[0].giroaguila = 0;//bien
+	KeyFrame[1].posX = -50;
+	KeyFrame[1].posY = 35;
+	KeyFrame[1].posZ = 50;
+	KeyFrame[1].giroaguila = 0;//mal
+	KeyFrame[2].posX = 0;
+	KeyFrame[2].posY = 30;
+	KeyFrame[2].posZ = 50;
+	KeyFrame[2].giroaguila = 0;//mal
+	KeyFrame[3].posX = 50;
+	KeyFrame[3].posY = 35;
+	KeyFrame[3].posZ = 50;
+	KeyFrame[3].giroaguila = 0;
+	KeyFrame[4].posX = 50;
+	KeyFrame[4].posY = 40;
+	KeyFrame[4].posZ = 0;
+	KeyFrame[4].giroaguila = 0;
+	KeyFrame[5].posX = 50;
+	KeyFrame[5].posY = 45;
+	KeyFrame[5].posZ = -50;
+	KeyFrame[5].giroaguila = 0;
+	KeyFrame[6].posX = 0;
+	KeyFrame[6].posY = 40;
+	KeyFrame[6].posZ = -50;
+	KeyFrame[6].giroaguila =0 ;
+	KeyFrame[7].posX = -50;
+	KeyFrame[7].posY = 35;
+	KeyFrame[7].posZ = -50;
+	KeyFrame[7].giroaguila = 0;
+	KeyFrame[8].posX = -50;
+	KeyFrame[8].posY = 40;
+	KeyFrame[8].posZ = 0;
+	KeyFrame[8].giroaguila = 0;
+
 
 	objCamera.Position_Camera(0, -2.0f, 5, 0, -2.0f, 0, 0, 1, 0);
 }
@@ -793,8 +893,8 @@ void arboles(void) {//tematicos
 		model1.GLrender(NULL, _SHADED, 1.0);
 		glPopMatrix();
 
-		glPushMatrix();
-			glTranslatef(-45, 40, 0);
+		glPushMatrix();//aguka
+			glTranslatef(posx, posy, posz);
 			glScalef(5, 5, 5);
 			model3.GLrender(NULL, _SHADED, 1.0);
 		glPopMatrix();
@@ -853,24 +953,8 @@ void display(void) { //se crea la funcion donde se dibuja todo
 					objCamera.mView.x, objCamera.mView.y, objCamera.mView.z,
 					objCamera.mUp.x, objCamera.mUp.y, objCamera.mUp.z);
 		glPushMatrix();
-			/*			//NOCHE
-			glPushMatrix();//Creamos caja Cielo
-				glDisable(GL_LIGHTING);
-				glTranslatef(0, 60, 0);
-				glColor3f(1, 1, 1);
-				fig1.skybox(180.0, 150.0, 150.0, text1.GLindex);
-				glEnable(GL_LIGHTING);
-				glColor3f(1, 1, 1);
-			glPopMatrix();//Fin de caja cielo
-
-			glPushMatrix();// inicio techo cielo
-			glTranslatef(0, 130, 0.0);
-			glScalef(200, .1, 200);
-			fig7.prisma2(text7.GLindex, text6.GLindex);
-
-			glPopMatrix();//fin techo cielo
-			*/
-						  //DIA
+		if (time == true) {
+			//DIA
 			glPushMatrix();//Creamos caja Cielo
 			glDisable(GL_LIGHTING);
 			glTranslatef(0, 60, 0);
@@ -883,6 +967,24 @@ void display(void) { //se crea la funcion donde se dibuja todo
 			glScalef(200, .1, 200);
 			fig6.prisma2(text6.GLindex, text6.GLindex);
 			glPopMatrix();//fin techo cielo
+		}
+		else {
+			//NOCHE
+			glPushMatrix();//Creamos caja Cielo
+			//glDisable(GL_LIGHTING);
+			glTranslatef(0, 60, 0);
+			glColor3f(1, 1, 1);
+			fig1.skybox(180.0, 150.0, 150.0, text1.GLindex);
+			//glEnable(GL_LIGHTING);
+			glColor3f(1, 1, 1);
+			glPopMatrix();//Fin de caja cielo
+
+			glPushMatrix();// inicio techo cielo
+				glTranslatef(0, 130, 0.0);
+				glScalef(200, .1, 200);
+				fig7.prisma2(text7.GLindex, text7.GLindex);
+			glPopMatrix();//fin techo cielo
+		}
 			
 				glPushMatrix();//Creamos pasto
 					pasto();
@@ -1082,11 +1184,6 @@ void display(void) { //se crea la funcion donde se dibuja todo
 
 				//arbustos
 				glPushMatrix();
-					glPushMatrix();
-					glTranslatef(7,-10, 45);
-					glScalef(10, 10, 10);
-					model4.GLrender(NULL, _SHADED, 1.0);
-					glPopMatrix();
 					glTranslatef(7, -10, 35);
 					arbusto();
 					glTranslatef(0, 0, -4);
@@ -1122,7 +1219,29 @@ void display(void) { //se crea la funcion donde se dibuja todo
 	glutSwapBuffers();
 }
 void animacion() {
-	//Animacion de tazas
+	if (play) {
+		if (i_curr_steps >= i_max_steps)
+		{
+			playIndex++;
+			if (playIndex > FrameIndex - 2) {
+				printf("termina animacion\m");
+				playIndex = 0;
+				play = false;
+			}
+			else {
+				i_curr_steps = 0;
+				interpolation();
+			}
+		}
+		else {
+			posx += KeyFrame[playIndex].incX;
+			posy += KeyFrame[playIndex].incY;
+			posz += KeyFrame[playIndex].incZ;
+
+			giroaguila += KeyFrame[playIndex].giroaguilainc;
+			i_curr_steps++;
+		}
+	}
 	glutPostRedisplay();
 }
 void reshape(int width, int height)   // Creamos funcion Reshape
@@ -1162,6 +1281,32 @@ void keyboard(unsigned char key, int x, int y)
 	case 'd':
 	case 'D':
 		objCamera.Strafe_Camera(CAMERASPEED + 0.3);
+		break;
+	case 'h':
+	case 'H':
+		if (play == false && (FrameIndex>1))
+		{
+
+			resetElements();
+			//First Interpolation				
+			interpolation();
+
+			play = true;
+			playIndex = 0;
+			i_curr_steps = 0;
+		}
+		else
+		{
+			play = false;
+		}
+		break;
+	case 't':
+	case 'T':
+		if (time == true) {
+			time = false;
+		}
+		else
+			time = true;
 		break;
 	case 27: exit(0);
 		break;
